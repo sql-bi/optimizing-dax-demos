@@ -1,6 +1,10 @@
 # optimizing-dax-demos
 Demo files for Optimizing DAX book.
 
+The files are divided into two releases:
+- **Demo files**: DAX code and small PBIX files used for specific chapters and demos. You can download the ZIP file in the release containing all these files organized in one folder for each chapter.
+- **Sample data**: Common PBIX files and databases used by all the demos in the book. Download the files you need according to the RAM and tools available on your computer. Read more in the following instructions.
+
 ## Software prerequisites
 You need the following software to practice using the book demos.
 If you want to know more about the optional tools, you can find more information in the [Mastering Tabular video course](https://www.sqlbi.com/p/mastering-tabular-video-course/) from [SQLBI](https://www.sqlbi.com).
