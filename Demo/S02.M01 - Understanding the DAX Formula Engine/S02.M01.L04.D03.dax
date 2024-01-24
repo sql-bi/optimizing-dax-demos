@@ -1,0 +1,14 @@
+﻿--
+--  Database: Contoso 10K
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Quantity GT 1",
+        SUMX ( 
+            'Sales',
+            IF ( 'Sales'[Quantity] > 1, 'Sales'[Quantity] )
+        )
+)
+

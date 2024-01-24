@@ -1,0 +1,13 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+CALCULATETABLE (
+    ADDCOLUMNS (
+        TOPN ( 3, ALL ( 'Product'[Color] ), [Sales Amount] ),
+        "@Sales", [Sales Amount]
+    ),
+    Customer[Continent] = "Europe"
+)
+

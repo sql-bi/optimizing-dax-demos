@@ -1,0 +1,11 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Impersonate ComplexRuleDynamic by using alberto@contoso.com user 
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    Product[Brand],
+    "Sales", [Sales Amount]
+)

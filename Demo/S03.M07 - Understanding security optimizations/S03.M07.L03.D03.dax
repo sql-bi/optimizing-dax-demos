@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Impersonate role CustomerEurope 
+DEFINE
+    MEASURE Sales[# Products] =
+        DISTINCTCOUNT ( Sales[ProductKey] )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Sales Amount", [Sales Amount],
+    "# Products", [# Products]
+)

@@ -1,0 +1,35 @@
+﻿--
+--  Database: Contoso 100Mx10 DQ
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+----------------------------------
+-- Calculated Column: ‘Sales’[USD]
+----------------------------------
+COLUMN Sales[USD] = “USD”
+
+
+-------------------------------------------
+-- Calculated Column: ‘Sales’[CurrencyDate]
+-------------------------------------------
+COLUMN Sales[CurrencyDate] = 
+    COMBINEVALUES ( 
+        “-“, 
+        Sales[Currency Code],
+        Sales[USD], 
+        Sales[Order Date] 
+    )
+
+
+-------------
+-- Test query
+-------------
+EVALUATE
+SUMMARIZECOLUMNS (
+    Sales[Currency Code],
+    "Original Currency",
+        SUMX (
+            Sales,
+            Sales[Quantity] * Sales[Net Price] / RELATED ( 'Currency Exchange'[Exchange] )
+        )
+)

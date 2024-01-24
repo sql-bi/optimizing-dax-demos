@@ -1,0 +1,8 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create ComplexRuleOptimized3 security role
+-- Apply the following filter to Security table
+Security[SecurityKey] IN { 14, 80, 82 }

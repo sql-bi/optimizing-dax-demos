@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+-- The following DEFINE is like a calculated column in the Sales table
+-- Line Amount = Sales[Quantity] * Sales[Net Price]
+-- 
+DEFINE
+    COLUMN Sales[Line Amount] = Sales[Quantity] * Sales[Net Price]
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    "Sales Amount", SUM ( Sales[Line Amount] )
+)

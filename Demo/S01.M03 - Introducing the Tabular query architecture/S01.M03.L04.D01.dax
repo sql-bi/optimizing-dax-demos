@@ -1,0 +1,15 @@
+﻿--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+--  We use the DQ tables
+--
+DEFINE
+    COLUMN 'Customer DQ'[ContinentCountry] = 
+        'Customer DQ'[Continent] & " - " & 'Customer DQ'[Country]
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Customer DQ'[ContinentCountry],
+    "#Customers", COUNTROWS ( 'Customer DQ' )
+)

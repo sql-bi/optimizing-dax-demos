@@ -1,0 +1,14 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+-- 
+-- This query does not use any relationship
+--
+EVALUATE
+{ 
+    CALCULATE (
+        COUNTROWS ( Sales ),
+        Sales[Quantity] > 1
+    )
+}

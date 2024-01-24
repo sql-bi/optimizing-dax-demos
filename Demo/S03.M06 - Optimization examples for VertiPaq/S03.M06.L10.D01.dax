@@ -1,0 +1,25 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Sales Brand Corrected] =
+        SWITCH (
+            SELECTEDVALUE ( 'Product'[Brand] ),
+            "Contoso", [Sales Amount] * 1.01,
+            "Fabrikam", [Sales Amount] * 1.02,
+            "Litware", [Sales Amount] * 1.03,
+            [Sales Amount]
+        )
+    MEASURE Sales[Sales Amount Corrected] =
+        SUMX ( 
+            VALUES ( 'Product'[Brand] ), 
+            [Sales Brand Corrected] 
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Color],
+    "Sales Amount", [Sales Amount],
+    "Sales Amount Corrected", [Sales Amount Corrected]
+)

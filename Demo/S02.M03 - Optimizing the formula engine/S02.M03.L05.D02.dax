@@ -1,0 +1,18 @@
+﻿--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[# Customers] =
+        DISTINCTCOUNT ( Sales[CustomerKey] )
+    MEASURE Sales[Growth] =
+        VAR CY = [# Customers]
+        VAR PY =
+            CALCULATE ( [# Customers], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+        VAR Result =
+            IF ( CY > 0 && PY > 0, DIVIDE ( CY - PY, PY ) )
+        RETURN
+            Result
+
+EVALUATE
+SUMMARIZECOLUMNS ( 'Date'[Year], "Growth %", [Growth] )

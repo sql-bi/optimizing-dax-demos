@@ -1,0 +1,16 @@
+﻿--
+--  Database: Contoso 100M - Runs for around 4 minutes and half
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Date],
+    'Product'[Color],
+    "Sales YTD",
+        CALCULATE (
+            SUMX ( DISTINCT ( Sales[ProductKey] ), 1 ),
+            DATESYTD ( 'Date'[Date] )
+        )
+)
+
+

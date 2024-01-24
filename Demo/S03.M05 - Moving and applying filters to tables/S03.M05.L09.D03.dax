@@ -1,0 +1,12 @@
+﻿--
+--  Database: Contoso 100M (applying the changes described the module)
+--            or use "S03.M05.L09.Bidirectional.PBIT" template
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Sport[Sport],
+    TREATAS ( GENERATESERIES ( 1, 10000 ), CustomerSport[CustomerKey] ),
+    "Sales Amount", [Sales Amount]
+)
+

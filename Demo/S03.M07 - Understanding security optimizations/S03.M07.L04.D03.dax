@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create calculated column in Customer table
+ContinentCode = 
+    RANKX ( 
+        ALL ( Customer[Continent] ), 
+        Customer[Continent], 
+        ,
+        ASC 
+    ) 

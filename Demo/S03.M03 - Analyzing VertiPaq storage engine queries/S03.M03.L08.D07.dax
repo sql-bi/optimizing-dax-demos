@@ -1,0 +1,12 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    COLUMN 'Product'[Test] = IF ( [Sales Amount] > 100, 1, 2 )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "SumResult", SUM ( 'Product'[Test] )
+)

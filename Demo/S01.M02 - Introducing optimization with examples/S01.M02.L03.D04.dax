@@ -1,0 +1,10 @@
+--
+--  Database: Contoso 100Mx10
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    "Sales Amount", SUM ( Sales[Line Amount (USD)] ),
+    "Cost Amount", SUM ( Sales[Line Cost (USD)] ),
+    "Margin Amount", SUM ( Sales[Line Margin (USD)] )
+)

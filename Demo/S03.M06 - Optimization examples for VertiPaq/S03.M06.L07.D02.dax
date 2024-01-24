@@ -1,0 +1,33 @@
+--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[Avg Var] =
+        VAR StartPrice =
+            AVERAGEX (
+                INDEX (
+                    1,
+                    ORDERBY ( Sales[Order Date] ),
+                    PARTITIONBY ( Sales[ProductKey], Sales[StoreKey] )
+                ),
+                CALCULATE ( AVERAGE ( Sales[Net Price] ) )
+            )
+        VAR EndPrice =
+            AVERAGEX (
+                INDEX (
+                    -1,
+                    ORDERBY ( Sales[Order Date] ),
+                    PARTITIONBY ( Sales[ProductKey], Sales[StoreKey] )
+                ),
+                CALCULATE ( AVERAGE ( Sales[Net Price] ) )
+            )
+        RETURN
+            DIVIDE ( EndPrice - StartPrice, StartPrice )
+
+EVALUATE
+ADDCOLUMNS ( 
+    VALUES ( 'Product'[Product Name] ), 
+    "Avg Var%", [Avg Var] 
+)
+ORDER BY [Product Name]

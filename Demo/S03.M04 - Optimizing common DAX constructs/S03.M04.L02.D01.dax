@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+{
+    SUMX (                          -- Outer iteration
+        'Product', 
+        SUMX (                      -- Inner iteration
+            RELATEDTABLE ( Sales ),
+            Sales[Quantity] * Sales[Net Price] 
+        )
+    )
+}

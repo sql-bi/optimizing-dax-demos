@@ -1,0 +1,9 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Remove all the existing security roles to avoid conflicts
+-- Create ComplexRuleDynamicSecurity security role
+-- Apply the following filter to UserCountriesBrands table
+UserCountriesBrands[UserName] == USERNAME ()

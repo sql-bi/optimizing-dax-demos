@@ -1,0 +1,12 @@
+﻿EVALUATE
+SUMMARIZECOLUMNS (
+    'Product DQ'[Brand],
+    "Avg Prod Sales",
+        DIVIDE (
+            SUMX (
+                'Sales DQ',
+                'Sales DQ'[Quantity] * 'Sales DQ'[Net Price]
+            ),
+            DISTINCTCOUNT ( 'Sales DQ'[ProductKey] )
+        )
+)

@@ -1,0 +1,11 @@
+﻿--
+--  Database: S01.M03.L06.D01 - Mixed model
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Continent],
+    'Date'[Year],
+    TREATAS ( { "Audio" }, 'Product'[Category] ),
+    "Amt", [Sales Amount]
+)

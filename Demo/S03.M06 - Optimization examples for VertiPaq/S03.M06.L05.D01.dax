@@ -1,0 +1,27 @@
+--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[AmtLocalCurrency] =
+        SUMX (
+            Sales,
+            VAR Amount = [Sales Amount]
+            VAR ExchangeRate =
+                LOOKUPVALUE (
+                    CurrencyExchange[Exchange],
+                    CurrencyExchange[FromCurrency], "USD",
+                    CurrencyExchange[ToCurrency], Sales[Currency Code],
+                    CurrencyExchange[Date], Sales[Order Date]
+                )
+            VAR Result = Amount * ExchangeRate
+            RETURN
+                Result
+        )
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    Sales[Currency Code],
+    "Amt Local", [AmtLocalCurrency]
+)
+ORDER BY Customer[Country], Sales[Currency Code]

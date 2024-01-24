@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+GROUPBY (
+    ADDCOLUMNS (
+        'Product',
+        "@Price Tag", IF ( 'Product'[Unit Price] >= 500, "Expensive", "Cheap" ),
+        "@Sales", [Sales Amount]
+    ),
+    [@Price Tag],
+    "@Result", SUMX ( CURRENTGROUP (), [@Sales] )
+)

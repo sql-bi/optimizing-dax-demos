@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Impersonate roles CustomerEurope and ProductContoso
+-- Repeat the same query executed before 
+-- and compare the differences by using the new roles conditions
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Continent],
+    Customer[ContinentCode]
+)
+ORDER BY Customer[Continent]

@@ -1,0 +1,14 @@
+﻿--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Sales PY] =
+        CALCULATE ( [Sales Amount], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year Month],
+    'Date'[Year Month Number],
+    "Sales Growth %", DIVIDE ( [Sales Amount] - [Sales PY], [Sales PY] )
+)
+ORDER BY 'Date'[Year Month Number]

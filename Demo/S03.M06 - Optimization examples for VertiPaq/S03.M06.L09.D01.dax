@@ -1,0 +1,23 @@
+--
+--  Database: Contoso 100M
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE MEASURE Sales[Open Orders] = 
+    VAR StartDate = MIN ( 'Date'[Date] )
+    VAR EndDate = MAX ( 'Date'[Date] )
+    VAR Result = 
+        CALCULATE ( 
+            DISTINCTCOUNT ( Sales[Order Number] ),
+            Sales[Order Date] <= EndDate,
+            Sales[Delivery Date] >= StartDate,
+            REMOVEFILTERS ( 'Date' )
+        )
+    RETURN 
+        Result
+EVALUATE
+    SUMMARIZECOLUMNS (
+        'Date'[Date],
+        TREATAS ( { 2015 }, 'Date'[Year] ),
+        "Open Orders",  [Open Orders] 
+    )
+ORDER BY [Date]

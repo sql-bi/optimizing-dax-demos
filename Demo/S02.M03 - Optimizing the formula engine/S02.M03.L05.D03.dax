@@ -1,0 +1,23 @@
+﻿--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[# Customers] =
+        DISTINCTCOUNT ( Sales[CustomerKey] )
+    MEASURE Sales[Growth] =
+        VAR Vals =
+            ADDCOLUMNS ( ALLSELECTED ( 'Date'[Year] ), "@CY", [# Customers] )
+        VAR CurrentYear =
+            SELECTEDVALUE ( 'Date'[Year] )
+        VAR CY =
+            MINX ( FILTER ( Vals, 'Date'[Year] = CurrentYear ), [@CY] )
+        VAR PY =
+            MINX ( FILTER ( Vals, 'Date'[Year] = CurrentYear - 1 ), [@CY] )
+        VAR Result =
+            IF ( CY > 0 && PY > 0, DIVIDE ( CY - PY, PY ) )
+        RETURN
+            Result
+
+EVALUATE
+SUMMARIZECOLUMNS ( 'Date'[Year], "Growth %", [Growth] )

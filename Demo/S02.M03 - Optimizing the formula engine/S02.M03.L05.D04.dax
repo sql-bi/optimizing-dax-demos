@@ -1,0 +1,21 @@
+﻿--
+--  Database: Contoso 100M.PBIX (DQ Tables)
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE 'Sales DQ'[# Customers] =
+        DISTINCTCOUNT ( 'Sales DQ'[CustomerKey] )
+    MEASURE 'Sales DQ'[Growth] =
+        IF (
+            AND (
+                [# Customers] > 0,
+                CALCULATE ( [# Customers], SAMEPERIODLASTYEAR ( 'Date DQ'[Date] ) ) > 0
+            ),
+            DIVIDE (
+                [# Customers] - CALCULATE ( [# Customers], SAMEPERIODLASTYEAR ( 'Date DQ'[Date] ) ),
+                CALCULATE ( [# Customers], SAMEPERIODLASTYEAR ( 'Date DQ'[Date] ) )
+            )
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS ( 'Date DQ'[Year], "Growth %", [Growth] )

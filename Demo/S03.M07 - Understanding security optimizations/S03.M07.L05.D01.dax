@@ -1,0 +1,16 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Connect using the following additional options:
+-- CustomData=CustomDataContent;
+EVALUATE
+SUMMARIZECOLUMNS (
+    "Username", USERNAME (),
+    "PrincipalName", USERPRINCIPALNAME (),
+    "CustomData", CUSTOMDATA ()
+)
+
+-- Create an empty CustomerDynamic role
+-- Impersonate CustomerDynamic by using alberto@contoso.com user 
+-- and then repeat the same query execution

@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 100Mx10
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+   'Product'[Brand],
+   "Discount if greater than 3",
+        SUMX (
+            Sales,
+            Sales[Quantity] * Sales[Net Price] 
+                * ( 0.8 + 0.2 * ( Sales[Quantity] <= 3 ) )
+        )
+)

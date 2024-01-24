@@ -1,0 +1,19 @@
+--
+--  Database: Contoso 1M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Test] =
+        IF.EAGER ( SUM ( Sales[Quantity] ) > 0, [Sales Amount] )
+
+EVALUATE
+{
+    COUNTROWS (
+        SUMMARIZECOLUMNS (
+            'Date'[Date],           -- 4,018 values
+            Customer[State],        --   605 values
+            'Product'[Color],       --    16 values
+            "Test", [Test]
+        )
+    )
+}

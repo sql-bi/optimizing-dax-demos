@@ -1,0 +1,13 @@
+﻿--
+--  Database: S01.M03.L05.D01 - Composite model
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    COLUMN Customer[ContinentCountry] = 
+        Customer[Continent] & " - " & Customer[Country]
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[ContinentCountry],
+    "#Customers", COUNTROWS ( Customer )
+)

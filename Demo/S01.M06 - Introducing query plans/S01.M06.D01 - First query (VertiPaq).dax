@@ -1,0 +1,16 @@
+﻿--
+--  Database: Contoso
+--  CPU: Intel Core i7-7820HQ 4-Core Processor 2.90 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Avg Prod Sales",
+        DIVIDE (
+            SUMX (
+                Sales,
+                Sales[Quantity] * Sales[Net Price]
+            ),
+            DISTINCTCOUNT ( Sales[ProductKey] )
+        )
+)

@@ -1,0 +1,29 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Set the Product table as Dual 
+--  and AggregatedSales to Import
+--  before executing the query
+--
+--  The following DEFINE is like a calculated column in the Sales table
+--  Agg line amount = Sales[Quantity] * Sales[Net Price]
+-- 
+--  Then execute the query before and after adding the
+--  SumOfAggLineAmount column to AggregatedSales
+--
+--
+--  IMPORTANT: remove the SumOfAggLineAmount aggregation
+--             before starting the demo, then repeat the query 
+--             after creating the aggregation as Sum Sales Agg Line amount
+--
+DEFINE
+    COLUMN Sales[Agg line amount] = Sales[Quantity] * Sales[Net Price]
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year],
+    Customer[Continent],
+    Customer[Country],
+    "Sum of Quantity", SUM ( Sales[Agg line amount] )
+)

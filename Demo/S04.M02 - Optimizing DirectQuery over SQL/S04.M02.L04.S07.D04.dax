@@ -1,0 +1,38 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+-- 
+--  This query captured from Power BI
+--  here is simplified for readability
+--
+DEFINE
+    VAR __DM3FilterTable = TREATAS({2010}, 'Date'[Year])
+
+    VAR __DM5FilterTable = 
+    TREATAS ( { (2010, "Australia"), (2010, "Europe") }, 'Date'[Year], 'Customer'[Continent] ) 
+    
+    VAR __DM7FilterTable = 
+        TREATAS(
+            {(2010, "Australia", "Australia")},
+            'Date'[Year],
+            'Customer'[Continent],
+            'Customer'[Country]
+        )
+
+    EVALUATE
+        SUMMARIZECOLUMNS(
+            ROLLUPADDISSUBTOTAL(
+                'Date'[Year], "IsGrandTotalRowTotal",
+                'Customer'[Continent], "IsDM1Total", 
+                    NONVISUAL(__DM3FilterTable),
+                'Customer'[Country], "IsDM3Total",
+                    NONVISUAL(__DM3FilterTable),
+                    NONVISUAL(__DM5FilterTable),
+                'Sales'[Order Number], "IsDM5Total", 
+                    NONVISUAL(__DM3FilterTable),
+                    NONVISUAL(__DM5FilterTable),
+                    NONVISUAL(__DM7FilterTable)
+            ),
+            "Sales_Amount", 'Sales'[Sales Amount]
+        )

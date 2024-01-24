@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Modify the relationship between Customer and Sales 
+--  as a many-to-many relationship with a sigle direction
+--  of the filter from Customer to Sales
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    "Sales Amount", [Sales Amount]
+)

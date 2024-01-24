@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create ComplexRule security role
+-- Apply the following filter to Sales table
+( RELATED ( Customer[Country] ), RELATED ( Product[Brand] ) ) 
+    IN 
+    {
+        ( "United States", "Contoso" ),
+        ( "United States", "Litware" ),
+        ( "Canada", "Contoso" )
+    }

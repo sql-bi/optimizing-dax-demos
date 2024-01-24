@@ -1,0 +1,19 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Execute the query with different settings in the Tabular model
+--  Make sure the Compatibility Level is >= 1569
+--  Set Model\MaxParallelismPerQuery to 1 for sequential execution
+--  Set Model\MaxParallelismPerQuery to 0 for max parallelism
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "IF Example",
+        IF (
+            [Sales Amount] > 1E3,
+            CALCULATE ( [Sales Amount], Product[Color] = "Black" ),
+            CALCULATE ( [Sales Amount], Customer[Gender] = "Male" )
+        )
+)

@@ -1,0 +1,12 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create or modify CustomerDynamic security role
+-- Apply the following filter to Customer table
+Customer[Continent] IN
+    CALCULATETABLE (
+        VALUES ( UserContinents[Continent] ),
+        UserContinents[UserName] == USERNAME ( )
+    )

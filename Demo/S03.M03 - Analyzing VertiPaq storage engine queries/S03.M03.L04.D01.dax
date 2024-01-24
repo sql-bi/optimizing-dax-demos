@@ -1,0 +1,9 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    FILTER ( ALL ( 'Product'[Unit Price] ), 'Product'[Unit Price] >= 100 ),
+    "Amt", SUMX ( Sales, Sales[Quantity] * Sales[Net Price] )
+)

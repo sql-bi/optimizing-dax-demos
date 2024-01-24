@@ -1,0 +1,17 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    "# Large Customers",
+        VAR CustomersAndSales =
+            ADDCOLUMNS ( VALUES ( Customer[CustomerKey] ), "@Amt", [Sales Amount] )
+        VAR AvgSales =
+            AVERAGEX ( CustomersAndSales, [@Amt] )
+        VAR LargeCustomers =
+            COUNTROWS ( FILTER ( CustomersAndSales, [@Amt] > AvgSales ) )
+        RETURN
+            LargeCustomers
+)

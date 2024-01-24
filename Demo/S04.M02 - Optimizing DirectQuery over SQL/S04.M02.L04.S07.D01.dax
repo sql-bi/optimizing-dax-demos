@@ -1,0 +1,20 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--
+DEFINE
+    MEASURE Sales[Sales Amount] =
+        IF (
+            ISFILTERED ( Sales[Order Number] ),
+            SUMX ( Sales, Sales[Quantity] * Sales[Net Price] ),
+            SUMX ( 'Sales Vp', 'Sales Vp'[Quantity] * 'Sales Vp'[Net Price] )     
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year],
+    Customer[Continent],
+    Customer[Country],
+    "Sales", [Sales Amount]
+)

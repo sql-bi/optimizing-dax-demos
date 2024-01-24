@@ -1,0 +1,18 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Sales Fancy Brands] = 
+        CALCULATE ( 
+            [Sales Amount],
+            KEEPFILTERS ( 
+                'Product'[Brand] IN { "Contoso", "Fabrikam", "Litware" } 
+            )
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Color],
+    "Sales Fancy Brands", [Sales Fancy Brands]
+)

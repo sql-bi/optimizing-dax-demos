@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Repeat this query after setting the aggregation 
+--  AggregatedSales in the model (still DirectQuery mode)
+--
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    'Date'[Year],
+    'Product'[Brand],
+    Customer[Continent],
+    Customer[Country],
+    "Quantity", SUM ( Sales[Quantity] )
+)

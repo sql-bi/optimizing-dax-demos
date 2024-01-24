@@ -1,0 +1,17 @@
+--
+--  Database: Contoso 1M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+FILTER (
+    SUMMARIZE (
+        Sales,
+        Product[Brand],
+        "Sales",
+            IF (
+                [Sales Amount] >= CALCULATE ( [Sales Amount], ALL () ) * 0.10,
+                [Sales Amount]
+            )
+    ),
+    NOT ( ISBLANK ( [Sales] ) )
+)

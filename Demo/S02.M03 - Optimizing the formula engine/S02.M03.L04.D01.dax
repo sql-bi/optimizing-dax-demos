@@ -1,0 +1,35 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Sales RT] =
+        VAR CurrentSales = [Sales Amount]       -- Sales of the current product
+        VAR ProductsWithMoreSales =
+            FILTER (                            -- Products with more sales than
+                ALL ( 'Product'[ProductKey] ),  -- the current product
+                [Sales Amount] >= CurrentSales
+            )
+        VAR Result =
+            CALCULATE (                         -- Computes the sales of all products
+                [Sales Amount],                 -- with more sales than the current
+                ProductsWithMoreSales           -- one (including the current product)
+            )
+        RETURN
+            Result
+    MEASURE Sales[Sales Pct] =
+        DIVIDE ( [Sales RT], CALCULATE ( [Sales Amount], ALLSELECTED () ) )
+    MEASURE Sales[ABC Class] =
+        VAR Pct = [Sales Pct]
+        RETURN
+            SWITCH ( TRUE (), Pct <= 0.7, "A", Pct <= 0.9, "B", "C" )
+
+EVALUATE
+ADDCOLUMNS (
+    VALUES ( 'Product'[ProductKey] ),
+    "Sales", [Sales Amount],
+    "Sales RT", [Sales RT],
+    "Sales Pct", [Sales Pct],
+    "ABC Class", [ABC Class]
+)
+ORDER BY [Sales] DESC

@@ -1,0 +1,16 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE 
+{
+    COUNTROWS (
+        SUMMARIZE (
+            Sales,
+            'Date'[Date],
+            'Product'[Color],
+            Customer[Country],
+            Sales[ProductKey]
+        )
+    )
+}

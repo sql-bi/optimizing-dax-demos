@@ -1,0 +1,24 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+-- 
+-- Use the Scenario table created in the previous demo
+-- Then evaluate this query in DAX Studio
+DEFINE
+    MEASURE Sales[Amount Corrected Hardcoded] =
+        [Sales Amount] * 
+        SWITCH (
+            SELECTEDVALUE ( Scenario[Sort Order] ),
+            1, 0.9,
+            2, 1.0,
+            3, 1.1,
+            1
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    Scenario[Scenario],  
+    Customer[City],
+    TREATAS ( { "Low" }, Scenario[Scenario] ),
+    "Amount Corrected", [Amount Corrected Hardcoded] 
+)

@@ -1,0 +1,8 @@
+﻿--
+--  Database: Contoso 100M x 10 on AS Tabular
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE 
+    SUMMARIZECOLUMNS ( 
+        "Result", SUMX ( Sales, Sales[Quantity] * Sales[Net Price] )
+    )

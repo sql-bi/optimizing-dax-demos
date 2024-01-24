@@ -1,0 +1,38 @@
+--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+ADDCOLUMNS (
+    VALUES ( 'Product'[Product Name] ),
+    "Avg Var%",
+        AVERAGEX (
+            VAR StoresAndFirstLastDate =
+                ADDCOLUMNS (
+                    VALUES ( 'Store'[Name] ),
+                    "@First Sale", CALCULATE ( MIN ( Sales[Order Date] ) ),
+                    "@Last Sale", CALCULATE ( MAX ( Sales[Order Date] ) )
+                )
+            VAR StoresAndFirstLastPrice =
+                ADDCOLUMNS (
+                    StoresAndFirstLastDate,
+                    "@First Net Price",
+                        VAR FirstSale = [@First Sale]
+                        RETURN
+                            CALCULATE ( AVERAGE ( Sales[Net Price] ), 'Date'[Date] = FirstSale ),
+                    "@Last Net Price",
+                        VAR LastSale = [@Last Sale]
+                        RETURN
+                            CALCULATE ( AVERAGE ( Sales[Net Price] ), 'Date'[Date] = LastSale )
+                )
+            VAR StoresAndVar =
+                ADDCOLUMNS (
+                    StoresAndFirstLastPrice,
+                    "@Var %", DIVIDE ( [@Last Net Price] - [@First Net Price], [@First Net Price] )
+                )
+            RETURN
+                StoresAndVar,
+            [@Var %]
+        )
+)
+ORDER BY [Product Name]

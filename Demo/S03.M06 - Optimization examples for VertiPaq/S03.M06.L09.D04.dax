@@ -1,0 +1,17 @@
+--
+--  Database: Contoso 100M (includes Orders calculated table)
+--            or use "S03.M06.L09 - Contoso 100M + Order Number.PBIT" template
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE 
+MEASURE Sales[Open Orders] = 
+    DISTINCTCOUNT ( OpenOrders[Order Number] )
+EVALUATE
+    SUMMARIZECOLUMNS (
+        'Date'[Date],
+        TREATAS ( { 2015 }, 'Date'[Year] ),
+        "Open Orders",  [Open Orders]
+    )
+ORDER BY [Date]
+
+

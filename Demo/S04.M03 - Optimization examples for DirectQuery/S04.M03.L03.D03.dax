@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Sales with large margin",
+        COUNTROWS (
+            FILTER (
+                Sales,
+                DIVIDE ( Sales[Net Price], Sales[Unit Cost] ) >= 2
+            )
+        )
+)

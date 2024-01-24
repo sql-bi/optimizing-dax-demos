@@ -1,0 +1,12 @@
+--
+--  Database: Contoso 100Mx10
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+CALCULATETABLE( 
+    { [Sales Amount] },
+    OR (
+        'Product'[Unit Price] >= 1000,
+        'Product'[Unit Cost] < 0
+    )
+)  

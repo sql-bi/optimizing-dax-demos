@@ -1,0 +1,21 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Set Date, Customer, Store, and Product tables as Dual 
+--  connected to Sales Vp table (all Sales columns but Order Number)
+--  Set all Sales Vp columns as GroupBy on corresponding Sales columns
+--  including Quantity, Unit Cost, Unit Price, and Net Price
+--  The only Sales Vp summarization is Count table rows
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year],
+    Customer[Continent],
+    Customer[Country],
+    "Sales",
+        SUMX (
+            SUMMARIZE ( Sales, Sales[Quantity], Sales[Net Price] ),
+            Sales[Quantity] * Sales[Net Price] * CALCULATE ( COUNTROWS ( Sales ) )
+        )
+)

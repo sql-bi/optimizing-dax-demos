@@ -1,0 +1,29 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[Growth] =
+        VAR Cy = [Sales Amount]
+        VAR PrevYearMonthNumber =
+            MAX ( 'Date'[Year Month Number] ) - 12
+        VAR Py =
+            CALCULATE (
+                [Sales Amount],
+                'Date'[Year Month Number] = PrevYearMonthNumber,
+                REMOVEFILTERS ( 'Date' )
+            )
+        VAR Result = Cy - Py
+        RETURN
+            Result
+EVALUATE
+TOPN (
+    100,
+    SUMMARIZECOLUMNS (
+        'Date'[Year Month],
+        Customer[State],
+        'Product'[Color],
+        "Growth", [Growth]
+    ),
+    [Growth], DESC
+)

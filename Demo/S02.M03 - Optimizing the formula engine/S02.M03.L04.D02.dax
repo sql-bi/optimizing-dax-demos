@@ -1,0 +1,24 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Sales RT] =
+        VAR CurrentSales = [Sales Amount]       -- Sales of the current product
+        VAR ProductsWithMoreSales =
+            FILTER (                            -- Products with more sales than
+                ALL ( 'Product'[ProductKey] ),  -- the current product
+                [Sales Amount] >= CurrentSales
+            )
+        VAR Result =
+            CALCULATE (                         -- Computes the sales of all products
+                [Sales Amount],                 -- with more sales than the current
+                ProductsWithMoreSales           -- one (including the current product)
+            )
+        RETURN
+            Result
+EVALUATE
+ADDCOLUMNS (
+    ALL ( 'Product'[ProductKey] ),
+    "Sales RT", [Sales RT]
+)

@@ -1,0 +1,15 @@
+﻿--
+--  Database: Contoso 1M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Sales Gt 200",
+        SUMX (
+            Sales,
+            VAR S = Sales[Quantity] * Sales[Net Price]
+            RETURN
+                IF ( S > 200, S )
+        )
+)

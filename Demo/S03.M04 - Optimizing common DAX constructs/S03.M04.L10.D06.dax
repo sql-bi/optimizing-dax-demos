@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[# Orders] = DISTINCTCOUNT ( Sales[Order Number] )
+
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    Customer[Continent],
+    ROLLUPADDISSUBTOTAL ( Product[Brand], "Brand Total" ), 
+    "# Orders", [# Orders] 
+)

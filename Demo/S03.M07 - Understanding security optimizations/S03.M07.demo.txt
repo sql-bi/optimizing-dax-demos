@@ -1,0 +1,11 @@
+You can start from Contoso 100M and proceed with the step-by-step demo.
+
+If you want to quickly create a model with all the security roles,
+you can use the following template files and regenerate the Contoso 100M
+by reading the data from Contoso 100M database on a SQL Server available
+on the "demo" alias:
+- Contoso 100M - security.pbit
+    Includes all the security roles but ComplexRuleDynamicSecurity 
+    (which cannot work because of conflicts with other security roles)
+- Contoso 100M - security - variation A.pbit
+    Includes only the ComplexRuleDynamicSecurity security role

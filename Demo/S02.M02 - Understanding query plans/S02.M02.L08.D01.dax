@@ -1,0 +1,18 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--  NOTE: Extremely long execution time (2 minutes)
+--
+EVALUATE
+ADDCOLUMNS (
+    VALUES ( 'Product'[Color] ),
+    "Sales",
+        VAR ProductKeys =
+            CALCULATETABLE ( VALUES ( 'Product'[ProductKey] ) )
+        VAR SalesOfProds =
+            FILTER ( Sales, Sales[ProductKey] IN ProductKeys )
+        VAR Result =
+            SUMX ( SalesOfProds, Sales[Quantity] * Sales[Net Price] )
+        RETURN
+            Result
+) 

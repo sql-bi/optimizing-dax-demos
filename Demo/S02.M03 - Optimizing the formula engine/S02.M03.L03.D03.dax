@@ -1,0 +1,21 @@
+﻿--
+--  Database: Contoso 100M x 10 on Analysis Services
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[Sales of best products] =
+        VAR ProductAndSales =
+            ADDCOLUMNS (
+                DISTINCT ( 'Product'[ProductKey] ),
+                "@Sales", [Sales Amount]
+            )
+        VAR AvgSales =
+            AVERAGEX ( ProductAndSales, [@Sales] )
+        RETURN
+            SUMX ( FILTER ( ProductAndSales, [@Sales] >= AvgSales ), [@Sales] )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Country],
+    "Sales of best products", [Sales of best products]
+)

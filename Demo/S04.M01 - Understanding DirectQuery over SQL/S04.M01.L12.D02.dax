@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Add a second copy of Product to the Tabular model
+--  from a different SQL Server database by using DirectQuery
+--  so that the model has data coming from multiple islands
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product (Island 2)'[Brand],
+    "Sales Amount", [Sales Amount]
+)

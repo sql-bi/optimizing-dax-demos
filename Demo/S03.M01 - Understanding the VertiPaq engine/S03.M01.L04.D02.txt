@@ -1,0 +1,4 @@
+ID,1,2,3,4,5,6,7,8,9
+Name,Camcorder,Camera,Smartphone,Console,TV,CD,Touch screen,PDA,Keyboard
+Color,Red,Red,White,Black,Blue,Red,Blue,Black,Black
+Unit Price,112.25,97.50,100.00,112.25,1240.85,39.99,45.12,120.25,120.50

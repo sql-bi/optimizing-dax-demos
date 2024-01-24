@@ -1,0 +1,20 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+VAR AverageSales =
+    [Sales Amount] / COUNTROWS ( 'Product' )
+RETURN
+    ADDCOLUMNS (
+        CROSSJOIN ( VALUES ( 'Date'[Year] ), VALUES ( 'Product'[Color] ) ),
+        "@Sales",
+            CALCULATE (
+                SUMX (
+                    'Product',
+                    VAR SalesOfProduct = [Sales Amount]
+                    RETURN
+                        IF ( SalesOfProduct >= AverageSales, SalesOfProduct )
+                )
+            )
+    )

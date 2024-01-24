@@ -1,0 +1,35 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[DaysWith0] =
+        VAR CurrentDate =
+            MAX ( 'Date'[Date] )
+        VAR FirstDateEver =
+            CALCULATE ( MIN ( 'Date'[Date] ), REMOVEFILTERS () )
+        VAR AllOrderDates =
+            CALCULATETABLE ( VALUES ( Sales[Order Date] ), REMOVEFILTERS ( 'Date' ) )
+        RETURN 
+            IF ( 
+                NOT ( CurrentDate IN AllOrderDates ),
+		        VAR PrevDateWithSales =
+		            COALESCE (
+		                MAXX ( 
+		                    FILTER (
+		                        AllOrderDates,
+		                        Sales[Order Date] <= CurrentDate
+		                    ),
+		                    Sales[Order Date]
+		                ),
+		                FirstDateEver
+		            )
+		        VAR Result =
+		            INT ( CurrentDate - PrevDateWithSales )
+		        RETURN
+		            Result,
+		        0
+		    )
+EVALUATE
+SUMMARIZECOLUMNS ( 'Date'[Date], "DaysWith0", 'Sales'[DaysWith0] )
+ORDER BY 'Date'[Date]

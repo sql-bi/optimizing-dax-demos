@@ -1,0 +1,12 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Modify security role CustomerEurope
+-- Apply the following filter to Customer table
+Customer[Continent] >= 2
+
+-- Modify security role ProductContoso 
+-- Apply the following filter to Product table
+'Product'[BrandCode] >= 3

@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 1M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+VAR AllSales = [Sales Amount] * 0.10
+RETURN
+    FILTER (
+        ADDCOLUMNS (
+            SUMMARIZE ( Sales, Product[Brand] ),
+            "Sales", IF.EAGER ( [Sales Amount] >= AllSales, [Sales Amount] )
+        ),
+        NOT ( ISBLANK ( [Sales] ) )
+    )

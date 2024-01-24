@@ -1,0 +1,18 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Total Discount] =
+        SUMX (
+            Sales,
+            Sales[Quantity] * Sales[Net Price]
+                * RELATED ( Customer[Discount %] )
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Category],
+    'Date'[Date],
+    "Total Discount", [Total Discount]
+)

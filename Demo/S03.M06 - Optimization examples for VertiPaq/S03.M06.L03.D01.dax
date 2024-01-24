@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100M.PBIX
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    MEASURE Sales[Test] =
+        CALCULATE (
+            [Sales Amount],
+            Customer[Country] IN { "Italy", "France" }
+                && Customer[Gender] = "Male"
+                && MONTH ( Customer[Birthday] ) = 10
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS ( 'Product'[Brand], "Test", [Test] )

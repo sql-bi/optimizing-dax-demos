@@ -1,0 +1,16 @@
+--
+--  Database: Contoso 100Mx10
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+EVALUATE
+VAR MinValue = MIN ( 'Product'[Unit Price] )
+VAR MaxValue = MAX ( 'Product'[Unit Price] ) 
+VAR Factor = 1000
+RETURN
+{
+    ( "Min value", MinValue ),
+    ( "Max value", MaxValue ),
+    ( "Delta", MaxValue - MinValue ),
+    ( "Delta x " & Factor, (MaxValue - MinValue) * Factor ),
+    ( "Bitmap size (bytes)", ROUNDUP ( ( (MaxValue - MinValue) * Factor ) / 8, 0 ) )
+}

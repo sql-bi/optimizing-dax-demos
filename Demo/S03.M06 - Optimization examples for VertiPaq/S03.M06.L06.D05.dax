@@ -1,0 +1,27 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[Running Total] =
+        VAR SourceTable =
+            ADDCOLUMNS (
+                ALL ( 'Date'[Date] ),
+                "@Sales", [Sales Amount]
+            )
+        RETURN
+            SUMX (
+                WINDOW (
+                    0, ABS,
+                    0, REL,
+                    SourceTable,
+                    ORDERBY ( 'Date'[Date] )
+                ),
+                [@Sales]
+            )
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Date],
+    "Running Total", [Running Total]
+)
+

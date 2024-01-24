@@ -1,0 +1,9 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Modify CustomerDynamic security role
+-- Remove filter on Customer table
+-- Apply the following filter to UserContinents table
+UserContinents[UserName] == USERNAME ()

@@ -1,0 +1,13 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create calculated table
+Orders = 
+    SUMMARIZECOLUMNS (
+        Sales[Order Number],
+        Sales[CustomerKey],
+        "Order Date", MIN ( Sales[Order Date] ),
+        "Delivery Date", MAX ( Sales[Delivery Date] )
+    ) 

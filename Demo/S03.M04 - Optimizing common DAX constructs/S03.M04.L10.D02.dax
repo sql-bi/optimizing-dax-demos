@@ -1,0 +1,11 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+Orders =
+SUMMARIZECOLUMNS (
+    Sales[Order Number],
+    Sales[StoreKey],
+    Sales[Order Date],
+    Sales[CustomerKey]
+)

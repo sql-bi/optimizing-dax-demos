@@ -1,0 +1,17 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+DEFINE
+    MEASURE Sales[# Orders] =
+        IF (
+            ISCROSSFILTERED ( 'Product' ),
+            DISTINCTCOUNT ( Sales[Order Number] ),
+            COUNTROWS ( Orders )
+        )
+
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    Customer[Continent], 
+    "# Orders", [# Orders] 
+)

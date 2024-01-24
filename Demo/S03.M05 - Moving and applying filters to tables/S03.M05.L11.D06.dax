@@ -1,0 +1,20 @@
+﻿--
+--  Database: Contoso 100M (applying the changes described the module)
+--            or use "S03.M05.L11.Snake.PBIT" template
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Sport[Sport],
+    Customer[Continent],
+    TREATAS ( { "Italy" }, Customer[Country] ),
+    "Sales Amount",
+        CALCULATE (
+            [Sales Amount],
+            TREATAS (
+                VALUES ( Customer[CustomerKey] ),
+                CustomerSport[CustomerKey]
+            ),
+            REMOVEFILTERS ( Customer )
+        )
+)

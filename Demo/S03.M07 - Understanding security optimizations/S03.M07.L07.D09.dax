@@ -1,0 +1,14 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Create UserCountriesBrands2 table by copying UserCountriesBrands
+UserCountriesBrands2 = UserCountriesBrands
+
+-- Create calculated column in UserCountriesBrands2 table
+SecurityKey =
+    LOOKUPVALUE (
+        Security[SecurityKey],
+        Security[Brand], UserCountriesBrands2[Brand],
+        Security[Country], UserCountriesBrands2[Country]
+    ) 

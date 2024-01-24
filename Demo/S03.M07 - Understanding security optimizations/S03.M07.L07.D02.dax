@@ -1,0 +1,20 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-- Create ComplexRuleDynamic security role
+-- Apply the following filter to Sales table
+( RELATED ( Customer[Country] ), RELATED ( Product[Brand] ) )
+    IN SELECTCOLUMNS (
+        FILTER (
+            UserCountriesBrands,
+            UserCountriesBrands[UserName] == USERNAME ()
+        ),
+        [Country],
+        [Brand]
+    )
+
+-- You can also hide the content of UserCountriesBrands (hide the security table to users)
+-- Apply the following filter to UserCountriesBrands table
+FALSE

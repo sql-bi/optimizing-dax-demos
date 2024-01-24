@@ -1,0 +1,9 @@
+1, Camcorder, Red, 112.25 |
+2, Camera, Red, 97.50 |
+3, Smartphone, White, 100.00 |
+4, Console, Black, 112.25 |
+5, TV, Blue,1, 240.85 |
+6, CD, Red, 39.99 |
+7, Touch screen, Blue, 45.12 |
+8, PDA, Black, 120.25 |
+9, Keyboard, Black, 120.50

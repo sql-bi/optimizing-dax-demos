@@ -1,0 +1,19 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU:      AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Product[Brand],
+    "Sales", [Sales Amount],
+    "Cost",
+        SUMX ( Sales, Sales[Quantity] * ( Sales[Unit Cost] - Sales[Net Price] ) ),
+    "Margin %",
+        DIVIDE (
+            SUMX ( Sales, Sales[Quantity] * ( Sales[Unit Cost] - Sales[Net Price] ) ),
+            SUMX ( Sales, Sales[Quantity] * Sales[Net Price] )
+        )
+)
+
+
+

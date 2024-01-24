@@ -1,0 +1,21 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Set the Product table as Dual 
+--  and AggregatedSales to Import
+--  before executing the query
+--
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    'Date'[Year],
+    Customer[Continent],
+    Customer[Country],
+    "Sum of Quantity", SUM ( Sales[Quantity] ),
+    "Average of Quantity", AVERAGE ( Sales[Quantity] ),
+    "Quantity if large", 
+        IF ( 
+            SUM ( Sales[Quantity] ) >= 10E6, 
+            SUM ( Sales[Quantity] )
+        )
+)

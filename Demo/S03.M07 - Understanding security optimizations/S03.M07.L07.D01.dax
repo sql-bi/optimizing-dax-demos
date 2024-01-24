@@ -1,0 +1,21 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+-- Create calculated table
+UserCountriesBrands = 
+    SELECTCOLUMNS (
+        {
+            ( "marco@contoso.com", "Italy", "Contoso" ),
+            ( "marco@contoso.com", "Italy", "Litware" ),
+            ( "marco@contoso.com", "France", "Contoso" ),
+            ( "marco@contoso.com", "Germany", "Litware" ),
+            ( "alberto@contoso.com", "Germany", "Litware" ),
+            ( "alberto@contoso.com", "Australia", "Contoso" ),
+            ( "alberto@contoso.com", "Australia", "Litware" ),
+            ( "alberto@contoso.com", "Australia", "Tailspin Toys" )
+        },
+        "UserName", [Value1],
+        "Country", [Value2],
+        "Brand", [Value3]
+    )
