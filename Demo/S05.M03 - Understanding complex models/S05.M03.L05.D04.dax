@@ -1,0 +1,11 @@
+﻿--
+--  Database: S05.M03.L05.D04 - Relationships in complex models
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+EVALUATE
+SUMMARIZECOLUMNS ( 
+    Customer[Continent],
+    TREATAS ( { "Male" }, Customer[Gender] ),
+    "# Customers", DISTINCTCOUNT ( Sales[CustomerKey] )
+)

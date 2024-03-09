@@ -1,0 +1,6 @@
+Change the many-to-one relationship with a single direction using 
+'Product'[Product Sales Remote] (many side)
+and
+'Sales Segmented'[Product Sales] (one side)
+
+(instead of starting from the 'Product'[Product Sales Remote] calculated column)

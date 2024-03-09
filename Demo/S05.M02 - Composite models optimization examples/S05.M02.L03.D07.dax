@@ -1,0 +1,4 @@
+----------------------------------
+-- Calculated table 'Local Date'
+----------------------------------
+Local Date = ALLNOBLANKROW ( 'Date'[Date] )

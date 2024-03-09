@@ -1,0 +1,15 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+
+--
+--  Query executed on the local model 
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'ABC Classes'[ABC Class],
+    TREATAS ( { "Europe" }, Customer[Continent] ),
+    "ABC Sales Amount", [ABC Sales Amount v2]
+)
+ORDER BY 'ABC Classes'[ABC Class]

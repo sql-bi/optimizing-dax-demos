@@ -1,0 +1,25 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    VAR Customers =
+        SELECTCOLUMNS (
+            {
+                ( 1, "Alberto", "Italy" ),
+                ( 2, "Daniele", "Italy" ),
+                ( 2, "Marco", "USA" ),
+                ( 3, "Claire", "France" )
+            },
+            "Key", [Value1],
+            "Name", [Value2],
+            "Country", [Value3]
+        )
+    TABLE CustomerList = { 1, 2, 2 }
+        
+EVALUATE
+GENERATE (
+    CustomerList,
+    DEPENDON ( Customers, CustomerList[Value] )
+)
+ORDER BY [Value], [Name]

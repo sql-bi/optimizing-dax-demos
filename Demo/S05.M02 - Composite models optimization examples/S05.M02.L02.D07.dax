@@ -1,0 +1,16 @@
+---------------------------------------
+-- Calculated table 'Sales Segmented'
+---------------------------------------
+Sales Segmented = 
+VAR Multiplier = 1E5
+RETURN
+GENERATE (
+    ALLNOBLANKROW ( Product[Product Sales] ),
+    FILTER (
+        'Product Segment',
+        AND (
+            'Product Segment'[MinValue] <= Product[Product Sales] * Multiplier,
+            'Product Segment'[MaxValue] > Product[Product Sales] * Multiplier
+        )
+    )
+)

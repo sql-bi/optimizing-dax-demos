@@ -1,0 +1,24 @@
+﻿--
+--  Database: S05.M03.L07.D02 - Using VertiPaq to snapshot
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year],
+    'Date'[Month Number],
+    "# Open Orders",
+        VAR MinDate =
+            MIN ( 'Date'[Date] )
+        VAR MaxDate =
+            MAX ( 'Date'[Date] )
+        VAR Result =
+            CALCULATE (
+                COUNTROWS ( Orders ),
+                Orders[Order Date] <= MaxDate,
+                Orders[Delivery Date] >= MinDate,
+                REMOVEFILTERS ( 'Date' )
+            )
+        RETURN
+            Result
+)

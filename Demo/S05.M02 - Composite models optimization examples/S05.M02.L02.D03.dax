@@ -1,0 +1,14 @@
+---------------------------------------
+-- Calculated table 'Sales Segmented'
+---------------------------------------
+Sales Segmented = 
+GENERATE (
+    ALLNOBLANKROW ( Product[Product Sales] ),
+    FILTER (
+        'Product Segment',
+        AND (
+            'Product Segment'[MinValue] <= Product[Product Sales],
+            'Product Segment'[MaxValue] > Product[Product Sales]
+        )
+    )
+)

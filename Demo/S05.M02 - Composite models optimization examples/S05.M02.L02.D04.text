@@ -1,0 +1,4 @@
+Create a many-to-one relationship with a single direction between 
+'Product'[Product Sales] (many side)
+and
+'Sales Segmented'[Product Sales] (one side)

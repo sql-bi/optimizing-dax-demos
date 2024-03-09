@@ -1,0 +1,17 @@
+﻿--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    VAR _Var0 = VALUES ( 'Product'[Brand] )
+    VAR _Var1 = VALUES ( 'Date'[Year] )
+
+EVALUATE
+
+GROUPCROSSAPPLY (
+    'Product'[Brand],
+    'Date'[Year],
+    _Var0,
+    _Var1,
+    "__Agg0", [Sales Amount]
+)

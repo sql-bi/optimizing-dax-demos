@@ -1,0 +1,20 @@
+---------------------------------------
+-- Calculated column in Product table
+---------------------------------------
+Segment =
+VAR ProductSales = [Sales Amount]
+VAR Segments =
+    FILTER (
+        'Product Segment',
+        AND (
+            'Product Segment'[MinValue] <= ProductSales,
+            'Product Segment'[MaxValue] > ProductSales
+        )
+    )
+VAR Result =
+    IF (
+        COUNTROWS ( Segments ) = 1,
+        MAXX ( Segments, 'Product Segment'[Segment] )
+    )
+RETURN
+    Result

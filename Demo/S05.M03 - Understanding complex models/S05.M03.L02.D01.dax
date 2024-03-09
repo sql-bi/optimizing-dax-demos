@@ -1,0 +1,10 @@
+﻿--
+--  Database: S05.M03.L02 - Understanding the role of formula engine
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    Customer[Continent],
+    'Product'[Brand],
+    "Sales", [Sales Amount]
+)

@@ -1,0 +1,4 @@
+---------------------------------------
+-- Calculated column in Product table
+---------------------------------------
+Product Sales = [Sales Amount]

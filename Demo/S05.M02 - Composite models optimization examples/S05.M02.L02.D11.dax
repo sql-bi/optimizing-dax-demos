@@ -1,0 +1,8 @@
+---------------------------------------
+-- Calculated column in Product table
+---------------------------------------
+Product Sales =
+CALCULATE (
+    INT ( [Sales Amount] / 1E5 ),
+    ALLEXCEPT ( 'Product', 'Product'[ProductKey] )
+)

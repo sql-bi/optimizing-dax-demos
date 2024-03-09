@@ -1,0 +1,14 @@
+﻿--
+--  Database: S05.M03.L04 - Calculated columns
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product Segment'[Segment],
+    "Amount",
+        CALCULATE (
+            [Sales Amount],
+            USERELATIONSHIP ( 'Product Sales'[ProductKey], Sales[ProductKey] )
+        )
+)

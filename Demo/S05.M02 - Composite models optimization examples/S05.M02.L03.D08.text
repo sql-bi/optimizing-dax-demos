@@ -1,0 +1,11 @@
+Remove the relationship between Budget and Date
+
+Create a one-to-one relationship between
+Date[Date]
+and 
+'Local Date'[Date]
+
+Create a many-to-one relationship with a single direction between 
+Budget[Date] (many side)
+and
+'Local Date'[Date] (one side)

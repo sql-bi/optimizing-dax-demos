@@ -1,0 +1,35 @@
+-------------------------------------
+-- Measure in Sales table
+--
+--    Modify ABC Sales Amount by replacing ALLSELECTED(Product) 
+--    with the AllSelectedProducts variable
+-------------------------------------
+ABC Sales Amount v2 = 
+VAR AllSelectedProducts =
+    CALCULATETABLE (
+        VALUES ( Product[ProductKey] ),
+        ALLSELECTED ( ),
+        REMOVEFILTERS ( Product )
+    )
+VAR AllSales = CALCULATE ( [Sales Amount], AllSelectedProducts )
+VAR PctByProduct = ADDCOLUMNS ( AllSelectedProducts, "@ProdPct", [Sales Amount] / AllSales )
+VAR CumulatedPctByProduct =
+    ADDCOLUMNS (
+        PctByProduct,
+        "@CumulatedPct",
+            SUMX ( 
+                WINDOW ( 0, ABS, 0, REL, PctByProduct, ORDERBY ( [@ProdPct], DESC ) ), 
+                [@ProdPct] 
+            )
+    )
+VAR ProductsInClass =
+    FILTER (
+        CROSSJOIN ( CumulatedPctByProduct, 'ABC Classes' ),
+        AND (
+            [@CumulatedPct] > 'ABC Classes'[Lower Boundary],
+            [@CumulatedPct] <= 'ABC Classes'[Upper Boundary]
+        )
+    )
+VAR Result = CALCULATE ( [Sales Amount], KEEPFILTERS ( ProductsInClass ) )
+RETURN
+    Result 

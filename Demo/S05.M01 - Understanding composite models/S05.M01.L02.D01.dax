@@ -1,0 +1,10 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+-------------------------------------
+-- Measure in Sales table
+-------------------------------------
+Sales Amount = 
+EXTERNALMEASURE ( "Sales Amount", CURRENCY, "DirectQuery to AS - Contoso 10M (Remote)" )

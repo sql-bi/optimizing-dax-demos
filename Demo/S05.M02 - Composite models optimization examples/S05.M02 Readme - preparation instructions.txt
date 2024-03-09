@@ -1,0 +1,34 @@
+In order to test the PBIX files in the "Composite models optimization examples" chapter:
+1) [Skip this step if you already published the same file from S05.M01]
+    a) Open "Contoso 10M (Remote).pbix" in the "\S05.M01 - Understanding composite models\Preparation" folder
+    b) Publish it to Power BI service in a workspace that has XMLA endpoint active (it cannot be My Workspace to enable DAX Studio analysis)
+    c) Close the file in Power BI Desktop
+2) Open "S05.M02.L02 Static segmentation.pbix":
+    a) Open Home / Transform data / Data source settings dialog box
+    b) Click "Change Source..."
+    c) Select the "Contoso 10M (Remote)" dataset from the list, use the name in Search box if it does not appear on the list
+    d) Click "Create"
+    e) In the "Connect to your data" dialog box, click "Submit"
+    f) In the "Data source settings" dialog box, click "Close"
+    g) Save the file
+3) Repeat all the steps in 2) for the "S05.M02.L04 Dynamic ABC.pbix"
+4) Open "S05.M02.L03 Budget and Time intelligence.pbix":
+    a) Open Home / Transform data / Data source settings dialog box
+    b) Select the "DirectQuery to AS - Power BI Dataset;Contoso 10M (Remote)" item
+    c) Click "Change Source..."
+    d) Select the "Contoso 10M (Remote)" dataset from the list, use the name in Search box if it does not appear on the list
+    e) Click "Create"
+    f) In the "Connect to your data" dialog box, click "Submit"
+    g) Select the "...\budget 2020.xlsx" file name from the list
+    h) Click "Change Source..."
+    i) In the "Excel Workbook" dialog box, fix the file path so that it points to the filename "Budget 2020.xlsx" in the subfolder "S05.M02.L03" of the sample files for this module (use the Browse... button to navigate in folders), then click "OK"
+    j) In the "Data source settings" dialog box, click "Close"
+    k) click "Apply Changes" button in the yellow warning to refresth the Budget calculated table
+    l) Save the file
+
+At this point, you can run the queries and demos in the section.
+When you open DAX studio connected to a local model, run 
+
+EVALUATE { [Sales Amount] } 
+
+a couple of times to warm up the connection.

@@ -1,0 +1,26 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Query executed on the remote model (2nd DAX SE query in local model)
+--
+EVALUATE
+SELECTCOLUMNS (
+    VALUES ( 'Product' ),
+    "__RN", BLANK (),
+    "'Product'[ProductKey]", 'Product'[ProductKey],
+    "'Product'[Product Code]", 'Product'[Product Code],
+    "'Product'[Product Name]", 'Product'[Product Name],
+    "'Product'[Manufacturer]", 'Product'[Manufacturer],
+    "'Product'[Brand]", 'Product'[Brand],
+    "'Product'[Color]", 'Product'[Color],
+    "'Product'[Weight Unit Measure]", 'Product'[Weight Unit Measure],
+    "'Product'[Weight]", 'Product'[Weight],
+    "'Product'[Unit Cost]", 'Product'[Unit Cost],
+    "'Product'[Unit Price]", 'Product'[Unit Price],
+    "'Product'[Subcategory Code]", 'Product'[Subcategory Code],
+    "'Product'[Subcategory]", 'Product'[Subcategory],
+    "'Product'[Category Code]", 'Product'[Category Code],
+    "'Product'[Category]", 'Product'[Category],
+    "'Product'[Product Sales]", 'Product'[Product Sales]
+)

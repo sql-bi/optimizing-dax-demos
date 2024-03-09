@@ -1,0 +1,10 @@
+﻿--
+--  Database: S05.M01.L09
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Brand],
+    "Combined Amount", [Sales Amount] + [Budget Amount]
+)
+

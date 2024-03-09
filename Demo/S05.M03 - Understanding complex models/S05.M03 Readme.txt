@@ -1,0 +1,3 @@
+The files in this folder use DirectQuery over SQL.
+They need the databases Contoso 10M and Contoso 100M on an alias "Demo" for Microsoft SQL Server.
+

@@ -1,0 +1,24 @@
+--
+--  Database: Contoso 100Mx10 DQ
+--  CPU: AMD Ryzen 9 7900X 12-Core Processor 4.70 GHz
+--
+--  Query executed on the remote model (2nd DAX SE query in local model)
+--
+DEFINE
+    VAR _Var0 = { 2020 }
+EVALUATE
+GROUPCROSSAPPLYTABLE (
+    'Date'[Year],
+    'Date'[Month Number],
+    ALLSELECTEDREMOVE (
+        FILTERCLUSTER (
+            'Date'[Year],
+            'Date'[Month Number],
+            TREATAS ( _Var0, 'Date'[Year] ),
+            "",
+            SUMMARIZE ( VALUES ( 'Date' ), 'Date'[Year], 'Date'[Month Number] )
+        ),
+        'Date'[Month Number]
+    ),
+    "L1", SUMMARIZE ( VALUES ( 'Date' ), 'Date'[Date] )
+)

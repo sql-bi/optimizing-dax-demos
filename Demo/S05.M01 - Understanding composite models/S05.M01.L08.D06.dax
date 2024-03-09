@@ -1,0 +1,16 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+DEFINE
+    VAR CustomerList = { 1212507, 1204911 }
+EVALUATE
+GENERATE (
+    CustomerList,
+    DEPENDON (
+        SELECTCOLUMNS ( Customer, Customer[CustomerKey], Customer[Name] ),
+        [Value]
+    )
+)
+
+

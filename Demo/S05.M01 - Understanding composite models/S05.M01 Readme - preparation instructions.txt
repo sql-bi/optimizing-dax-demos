@@ -1,0 +1,33 @@
+In order to test the PBIX files in the "Understanding composite models" chapter:
+1) Publish the remote model to Power BI Service:
+    a) Open "Contoso 10M (Remote).pbix" in the "Preparation" folder - or in the Sample data release on GitHub
+    b) Publish it to Power BI service in a workspace that has XMLA endpoint active (it cannot be My Workspace to enable DAX Studio analysis)
+    c) Close the file in Power BI Desktop
+2) Open "S05.M01.Composite model (Local).pbix":
+    a) Open Home / Transform data / Data source settings dialog box
+    b) Click "Change Source..."
+    c) Select the "Contoso 10M (Remote)" dataset from the list, use the name in Search box if it does not appear on the list
+    d) Click "Create"
+    e) In the "Connect to your data" dialog box, click "Submit"
+    f) In the "Data source settings" dialog box, click "Close"
+    g) Save the file
+3) Open "S05.M01.L09 Budget.pbix":
+    a) Open Home / Transform data / Data source settings dialog box
+    b) Select the "DirectQuery to AS - Power BI Dataset;Contoso 10M (Remote)" item
+    c) Click "Change Source..."
+    d) Select the "Contoso 10M (Remote)" dataset from the list, use the name in Search box if it does not appear on the list
+    e) Click "Create"
+    f) In the "Connect to your data" dialog box, click "Submit"
+    g) Select the "...\budget 2020.xlsx" file name from the list
+    h) Click "Change Source..."
+    i) In the "Excel Workbook" dialog box, fix the file path so that it points to the filename "Budget 2020.xlsx" in the subfolder "S05.M01.L09" of the sample files for this module (use the Browse... button to navigate in folders), then click "OK"
+    j) In the "Data source settings" dialog box, click "Close"
+    k) click "Apply Changes" button in the yellow warning to refresth the Budget calculated table
+    l) Save the file
+
+At this point, you can run the queries and demos in the section.
+When you open DAX studio connected to a local model, run 
+
+EVALUATE { [Sales Amount] } 
+
+a couple of times to warm up the connection.

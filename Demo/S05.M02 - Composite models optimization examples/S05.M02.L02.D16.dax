@@ -1,0 +1,18 @@
+------------------------------------------------
+-- Calculated table 'Sales Segmented Customer'
+------------------------------------------------
+-- NOTE: it depends on Customer[Customer Sales] 
+--       defined in the remote model
+Sales Segmented Customer = 
+VAR Multiplier = 100
+RETURN
+GENERATE (
+    ALLNOBLANKROW ( Customer[Customer Sales] ),
+    FILTER (
+        'Customer Segment',
+        AND (
+            'Customer Segment'[MinValue] <= Customer[Customer Sales] * Multiplier,
+            'Customer Segment'[MaxValue] > Customer[Customer Sales] * Multiplier
+        )
+    )
+)

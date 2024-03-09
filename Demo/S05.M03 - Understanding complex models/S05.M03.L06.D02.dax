@@ -1,0 +1,10 @@
+--
+--  Database: Contoso 100M
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerLinked[Continent],
+    TREATAS ( { "Male" }, CustomerLinked[Gender] ),
+    "Amount", [Sales Amount]
+)

@@ -1,0 +1,14 @@
+﻿--
+--  Database: Composite model
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+
+--------------------------------------
+-- Calculated table CorrectionFactor
+--------------------------------------
+CorrectionFactor = 
+SELECTCOLUMNS (
+    ALLNOBLANKROW ( 'Date'[Year] ),
+    "Year", 'Date'[Year],
+    "Correction Factor", ( 'Date'[Year] - 2000 ) / 10
+)

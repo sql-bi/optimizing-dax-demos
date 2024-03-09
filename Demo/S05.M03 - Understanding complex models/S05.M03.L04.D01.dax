@@ -1,0 +1,26 @@
+﻿--  Database: S05.M03.L04 - Calculated columns
+--  CPU: AMD Ryzen Threadripper 3970X 32-Core Processor 3.72 GHz
+--
+Product Sales =
+VAR ProductsAndSales =
+    ADDCOLUMNS (
+        ALLNOBLANKROW ( 'Product'[ProductKey] ),
+        "Product Sales", CALCULATE ( [Sales Amount] )
+    )
+VAR ProductsAndSalesCategorized =
+    ADDCOLUMNS (
+        ProductsAndSales,
+        "Segment",
+            SELECTCOLUMNS (
+                FILTER (
+                    'Product Segment',
+                    AND (
+                        'Product Segment'[MinValue] < [Product Sales],
+                        'Product Segment'[MaxValue] >= [Product Sales]
+                    )
+                ),
+                "Segment", 'Product Segment'[Segment]
+            )
+    )
+RETURN
+    ProductsAndSalesCategorized
