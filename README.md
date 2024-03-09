@@ -1,9 +1,9 @@
 # optimizing-dax-demos
 Demo files for Optimizing DAX book.
 
-The files are divided into two releases:
-- [**Demo files**](https://github.com/sql-bi/optimizing-dax-demos/releases/tag/demo-files): DAX code and small PBIX files used for specific chapters and demos. You can download the ZIP file in the release containing all these files organized in one folder for each chapter.
-- [**Sample data**](https://github.com/sql-bi/optimizing-dax-demos/releases/tag/sample-data): Common PBIX files and databases used by all the demos in the book. Download the files you need according to the RAM and tools available on your computer. Read more in the following instructions.
+The files are available in the sample divided in the [**Sample data**](https://github.com/sql-bi/optimizing-dax-demos/releases/tag/sample-data) release:
+- The **Source code** includes DAX code and small PBIX files used for specific chapters and demos. You can download the ZIP file in the release containing all these files organized in one folder for each chapter, or access to the Demo folder in the GitHub repository.
+- The other filews are common PBIX files and databases used by all the demos in the book. Download the files you need according to the RAM and tools available on your computer. Read more in the following instructions.
 
 ## Software prerequisites
 You need the following software to practice using the book demos.
